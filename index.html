@@ -133,17 +133,17 @@
     <div class="container">
         <h1 class="logo">Polarius</h1>
         <p class="tagline">
-            A matrix-based client for a proof-of-contribution DAO system with contribution-weighted governance
+            A Matrix-based client for a proof-of-contribution DAO system with contribution-weighted governance, adapted from Element.
         </p>
         
         <div class="buttons">
-            <a href="#" class="btn btn-primary">
+            <a href="https://vialucis1597.github.io/polarius-web/" class="btn btn-primary" target="_blank">
                 🌐 Launch Web App
             </a>
-            <a href="#" class="btn btn-secondary">
+            <a href="https://github.com/vialucis1597/polarius-desktop/releases/latest/download/Polarius-Setup.exe" class="btn btn-secondary">
                 💻 Download for Windows
             </a>
-            <a href="#" class="btn btn-tertiary">
+            <a href="https://github.com/vialucis1597/polarius-desktop/releases/latest/download/Polarius.dmg" class="btn btn-tertiary">
                 🍎 Download for Mac
             </a>
         </div>
@@ -154,19 +154,25 @@
     </div>
 
     <script>
-        // Add click handlers for buttons
+        // Track button clicks for analytics
         document.querySelectorAll('.btn').forEach(btn => {
             btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                
                 const buttonText = this.textContent.trim();
                 
-                if (buttonText.includes('Web App')) {
-                    alert('Web app will be launched here');
-                } else if (buttonText.includes('Windows')) {
-                    alert('Windows download will be available here');
-                } else if (buttonText.includes('Mac')) {
-                    alert('Mac download will be available here');
+                // Log click events (can be used for analytics)
+                console.log('Button clicked:', buttonText);
+                
+                // Add loading state for download buttons
+                if (buttonText.includes('Download')) {
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '⏳ Downloading...';
+                    this.style.opacity = '0.7';
+                    
+                    // Reset after 3 seconds
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        this.style.opacity = '1';
+                    }, 3000);
                 }
             });
         });
