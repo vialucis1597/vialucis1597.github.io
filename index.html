@@ -143,24 +143,6 @@
             transform: scale(1.05);
         }
 
-        .organization::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            right: -30px;
-            transform: translateY(-50%);
-            width: 24px;
-            height: 24px;
-            background-image: url('logo1-icon.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            z-index: 1;
-            /* Fallback for when image doesn't load */
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
 
         @media (max-width: 768px) {
             .logo {
@@ -188,11 +170,6 @@
                 max-width: 300px;
             }
 
-            .organization::after {
-                width: 20px;
-                height: 20px;
-                right: -25px;
-            }
         }
     </style>
 </head>
