@@ -108,6 +108,19 @@
             color: #FFD700;
         }
 
+        .organization a {
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .organization a:hover {
+            color: #FFA500;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+            transform: scale(1.05);
+        }
+
         @media (max-width: 768px) {
             .logo {
                 font-size: 3rem;
@@ -149,7 +162,7 @@
         </div>
         
         <div class="organization">
-            <p>Developed by <strong>BROTHERHOOD</strong></p>
+            <p>Developed by <a href="https://github.com/BROTHERHOOD42" target="_blank">BROTHERHOOD</a></p>
         </div>
     </div>
 
@@ -175,6 +188,11 @@
                     }, 3000);
                 }
             });
+        });
+
+        // Track BROTHERHOOD link clicks
+        document.querySelector('.organization a').addEventListener('click', function(e) {
+            console.log('BROTHERHOOD link clicked - redirecting to GitHub organization');
         });
     </script>
 </body>
