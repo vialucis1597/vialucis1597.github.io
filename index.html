@@ -184,11 +184,8 @@
             <a href="https://BROTHERHOOD42.github.io/polarius-web/webapp" class="btn btn-primary" target="_blank">
                 🌐 Launch Web App
             </a>
-            <a href="#" id="windows-download" class="btn btn-secondary">
+            <a href="https://github.com/BROTHERHOOD42/Polarius-desktop/releases/download/Polarius-desktop/Polarius.Setup.1.11.110.exe" class="btn btn-secondary">
                 💻 Download for Windows
-            </a>
-            <a href="https://github.com/vialucis1597/element-desktop/releases/download/polarius/Polarius.dmg" class="btn btn-tertiary">
-                🍎 Download for Mac
             </a>
         </div>
         
@@ -198,38 +195,6 @@
     </div>
 
     <script>
-        // Function to get latest Windows download link from GitHub API
-        async function getLatestWindowsDownload() {
-            try {
-                const response = await fetch('https://api.github.com/repos/BROTHERHOOD42/Polarius-desktop/releases/latest');
-                const release = await response.json();
-                
-                // Find the Windows setup file (Polarius.setup.*.exe)
-                const windowsAsset = release.assets.find(asset => 
-                    asset.name.startsWith('Polarius.setup') && asset.name.endsWith('.exe')
-                );
-                
-                if (windowsAsset) {
-                    const downloadLink = document.getElementById('windows-download');
-                    downloadLink.href = windowsAsset.browser_download_url;
-                    downloadLink.setAttribute('data-version', release.tag_name);
-                    console.log('Latest Windows download:', windowsAsset.name, 'Version:', release.tag_name);
-                } else {
-                    console.warn('No Windows setup file found in latest release');
-                }
-            } catch (error) {
-                console.error('Failed to fetch latest release:', error);
-                // Fallback to original link
-                const downloadLink = document.getElementById('windows-download');
-                downloadLink.href = 'https://github.com/BROTHERHOOD42/Polarius-desktop/releases/latest';
-            }
-        }
-
-        // Load latest download link when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            getLatestWindowsDownload();
-        });
-
         // Track button clicks for analytics
         document.querySelectorAll('.btn').forEach(btn => {
             btn.addEventListener('click', function(e) {
