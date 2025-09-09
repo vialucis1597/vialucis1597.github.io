@@ -39,8 +39,8 @@
         .logo::after {
             content: '';
             position: absolute;
-            top: -0px;
-            right: -30px;
+            top: 2px;
+            right: -31px;
             width: 24px;
             height: 24px;
             background-image: url('logo-icon.png');
@@ -122,6 +122,8 @@
             margin-top: 3rem;
             font-size: 1rem;
             opacity: 0.8;
+            position: relative;
+            display: inline-block;
         }
 
         .organization strong {
@@ -141,6 +143,25 @@
             transform: scale(1.05);
         }
 
+        .organization::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -30px;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            background-image: url('logo-icon.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            z-index: 1;
+            /* Fallback for when image doesn't load */
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
         @media (max-width: 768px) {
             .logo {
                 font-size: 3rem;
@@ -149,8 +170,8 @@
             .logo::after {
                 width: 20px;
                 height: 20px;
-                right: -25px;
-                top: -3px;
+                right: -26px;
+                top: 1px;
             }
             
             .tagline {
@@ -165,6 +186,12 @@
             .btn {
                 width: 100%;
                 max-width: 300px;
+            }
+
+            .organization::after {
+                width: 20px;
+                height: 20px;
+                right: -25px;
             }
         }
     </style>
