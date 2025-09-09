@@ -32,6 +32,26 @@
             font-weight: bold;
             margin-bottom: 1rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -60px;
+            width: 50px;
+            height: 50px;
+            background-image: url('logo-icon.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            z-index: 1;
+            /* Fallback for when image doesn't load */
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
         .tagline {
@@ -124,6 +144,13 @@
         @media (max-width: 768px) {
             .logo {
                 font-size: 3rem;
+            }
+            
+            .logo::before {
+                width: 40px;
+                height: 40px;
+                left: -50px;
+                top: -8px;
             }
             
             .tagline {
