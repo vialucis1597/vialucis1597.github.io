@@ -118,6 +118,58 @@
             box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
         }
 
+        .btn-quaternary {
+            background: #9C27B0;
+            color: white;
+        }
+
+        .btn-quaternary:hover {
+            background: #7B1FA2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(156, 39, 176, 0.3);
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.9);
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 8px;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 0.5rem;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s ease;
+            border-radius: 8px;
+            margin: 0.25rem;
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .btn {
+            transform: translateY(-2px);
+        }
+
         .organization {
             margin-top: 3rem;
             font-size: 1rem;
@@ -170,6 +222,35 @@
                 max-width: 300px;
             }
 
+            .dropdown {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .dropdown-content {
+                position: static;
+                display: none;
+                transform: none;
+                margin-top: 0;
+                box-shadow: none;
+                background-color: rgba(0, 0, 0, 0.7);
+                border-radius: 0 0 8px 8px;
+            }
+
+            .dropdown.active .dropdown-content {
+                display: block;
+            }
+
+            .dropdown-content a {
+                margin: 0;
+                border-radius: 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .dropdown-content a:last-child {
+                border-bottom: none;
+                border-radius: 0 0 8px 8px;
+            }
         }
     </style>
 </head>
@@ -184,12 +265,38 @@
             <a href="https://BROTHERHOOD42.github.io/polarius-web/webapp" class="btn btn-primary" target="_blank">
                 🌐 Launch Web App
             </a>
-            <a href="https://github.com/BROTHERHOOD42/Polarius-desktop/releases/download/Polarius-desktop/Polarius.Setup.1.11.110.exe" class="btn btn-secondary">
-                💻 Download for Windows
-            </a>
-            <a href="https://github.com/vialucis1597/element-desktop/releases/download/polarius/Polarius.dmg" class="btn btn-tertiary">
+            
+            <div class="dropdown">
+                <button class="btn btn-secondary">
+                    💻 Download for Windows ▼
+                </button>
+                <div class="dropdown-content">
+                    <a href="https://github.com/BROTHERHOOD42/Polarius-desktop/releases/latest/download/Polarius-Setup.exe">
+                        🖥️ Windows x64
+                    </a>
+                    <a href="https://github.com/BROTHERHOOD42/Polarius-desktop/releases/latest/download/Polarius-Setup-arm64.exe">
+                        🔧 Windows ARM64
+                    </a>
+                </div>
+            </div>
+            
+            <a href="https://github.com/BROTHERHOOD42/Polarius-desktop/releases/latest/download/Polarius-universal.dmg" class="btn btn-tertiary">
                 🍎 Download for Mac
             </a>
+            
+            <div class="dropdown">
+                <button class="btn btn-quaternary">
+                    🐧 Download for Linux ▼
+                </button>
+                <div class="dropdown-content">
+                    <a href="https://github.com/BROTHERHOOD42/Polarius-desktop/releases/latest/download/Polarius-desktop.tar.gz">
+                        🖥️ Linux AMD64
+                    </a>
+                    <a href="https://github.com/BROTHERHOOD42/Polarius-desktop/releases/latest/download/Polarius-desktop-arm64.tar.gz">
+                        🔧 Linux ARM64
+                    </a>
+                </div>
+            </div>
         </div>
         
         <div class="organization">
@@ -198,16 +305,44 @@
     </div>
 
     <script>
-        // Track button clicks for analytics
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                const buttonText = this.textContent.trim();
+        // Dropdown functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdowns = document.querySelectorAll('.dropdown');
+            
+            dropdowns.forEach(dropdown => {
+                const button = dropdown.querySelector('button');
+                const content = dropdown.querySelector('.dropdown-content');
                 
-                // Log click events (can be used for analytics)
-                console.log('Button clicked:', buttonText);
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Close other dropdowns
+                    dropdowns.forEach(otherDropdown => {
+                        if (otherDropdown !== dropdown) {
+                            otherDropdown.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current dropdown
+                    dropdown.classList.toggle('active');
+                });
                 
-                // Add loading state for download buttons
-                if (buttonText.includes('Download')) {
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!dropdown.contains(e.target)) {
+                        dropdown.classList.remove('active');
+                    }
+                });
+            });
+            
+            // Track download link clicks
+            document.querySelectorAll('.dropdown-content a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const linkText = this.textContent.trim();
+                    console.log('Download link clicked:', linkText);
+                    
+                    // Add loading state
                     const originalText = this.innerHTML;
                     this.innerHTML = '⏳ Downloading...';
                     this.style.opacity = '0.7';
@@ -217,13 +352,34 @@
                         this.innerHTML = originalText;
                         this.style.opacity = '1';
                     }, 3000);
-                }
+                });
             });
-        });
+            
+            // Track regular button clicks
+            document.querySelectorAll('.btn:not(.dropdown button)').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const buttonText = this.textContent.trim();
+                    console.log('Button clicked:', buttonText);
+                    
+                    // Add loading state for download buttons
+                    if (buttonText.includes('Download')) {
+                        const originalText = this.innerHTML;
+                        this.innerHTML = '⏳ Downloading...';
+                        this.style.opacity = '0.7';
+                        
+                        // Reset after 3 seconds
+                        setTimeout(() => {
+                            this.innerHTML = originalText;
+                            this.style.opacity = '1';
+                        }, 3000);
+                    }
+                });
+            });
 
-        // Track BROTHERHOOD link clicks
-        document.querySelector('.organization a').addEventListener('click', function(e) {
-            console.log('BROTHERHOOD link clicked - redirecting to GitHub organization');
+            // Track BROTHERHOOD link clicks
+            document.querySelector('.organization a').addEventListener('click', function(e) {
+                console.log('BROTHERHOOD link clicked - redirecting to GitHub organization');
+            });
         });
     </script>
 </body>
