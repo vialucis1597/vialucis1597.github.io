@@ -162,12 +162,13 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
 
-        .dropdown:hover .dropdown-content {
+        .dropdown.active .dropdown-content {
             display: block;
         }
 
-        .dropdown:hover .btn {
+        .dropdown.active .btn {
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .organization {
@@ -262,13 +263,13 @@
         </p>
         
         <div class="buttons">
-            <a href="https://BROTHERHOOD42.github.io/polarius-web/webapp" class="btn btn-primary" target="_blank">
+            <a href="https://BROTHERHOOD42.github.io/Polarius-web/webapp" class="btn btn-primary" target="_blank">
                 🌐 Launch Web App
             </a>
             
             <div class="dropdown">
                 <button class="btn btn-secondary">
-                    💻 Download for Windows ▼
+                    💻 Download for Windows
                 </button>
                 <div class="dropdown-content">
                     <a href="https://github.com/BROTHERHOOD42/Polarius-desktop/releases/latest/download/Polarius-Setup.exe">
@@ -286,7 +287,7 @@
             
             <div class="dropdown">
                 <button class="btn btn-quaternary">
-                    🐧 Download for Linux ▼
+                    🐧 Download for Linux
                 </button>
                 <div class="dropdown-content">
                     <a href="https://github.com/BROTHERHOOD42/Polarius-desktop/releases/latest/download/Polarius-desktop.tar.gz">
