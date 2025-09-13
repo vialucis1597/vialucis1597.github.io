@@ -147,19 +147,22 @@
         }
 
         .btn-guide {
-            background: white;
-            color: #333;
-            border: 2px solid #FF5722;
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             font-size: 0.9rem;
-            padding: 0.7rem 1.5rem;
+            padding: 0.6rem 1.2rem;
             min-width: auto;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
 
         .btn-guide:hover {
-            background: #FF5722;
+            background: rgba(255, 255, 255, 0.2);
             color: white;
-            transform: translateY(-1px);
-            box-shadow: 0 2px 8px rgba(255, 87, 34, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: none;
+            box-shadow: none;
         }
 
         .dropdown {
@@ -419,6 +422,13 @@
                 max-width: 300px;
             }
 
+            .btn-guide {
+                font-size: 0.8rem;
+                padding: 0.5rem 1rem;
+                flex: 1;
+                min-width: 0;
+            }
+
             .dropdown {
                 width: 100%;
                 max-width: 300px;
@@ -458,12 +468,12 @@
             A Matrix client combining a Proof-of-Contribution token system for shared goals with contribution-weighted governance.
         </p>
         
-        <div style="margin: 2rem 0; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <div style="margin: 2rem 0; display: flex; gap: 1rem; justify-content: center; flex-wrap: nowrap;">
             <button class="btn btn-guide" id="guideBtn">
-                📖 Overview & User Guide (English)
+                Overview & Guide
             </button>
             <button class="btn btn-guide" id="guideBtnKr">
-                📖 개요 및 사용자 가이드 (한국어)
+                개요 및 가이드
             </button>
         </div>
         
