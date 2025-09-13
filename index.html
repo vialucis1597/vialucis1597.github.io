@@ -150,8 +150,8 @@
             background: none;
             color: rgba(255, 255, 255, 0.9);
             border: none;
-            font-size: 1.1rem;
-            padding: 0.4rem 0.6rem;
+            font-size: 0.9rem;
+            padding: 0.3rem 0.5rem;
             min-width: auto;
             text-decoration: underline;
             text-decoration-color: rgba(255, 255, 255, 0.6);
@@ -233,6 +233,25 @@
             color: #FFA500;
             text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
             transform: scale(1.05);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            width: 24px;
+            height: 24px;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            opacity: 1;
+            transform: scale(1.1);
         }
 
         .guide-section {
@@ -426,11 +445,15 @@
             }
 
             .btn-guide {
-                font-size: 1rem;
-                padding: 0.3rem 0.4rem;
+                font-size: 0.8rem;
+                padding: 0.2rem 0.3rem;
                 flex: 1;
                 min-width: 0;
                 text-underline-offset: 2px;
+            }
+            
+            .guide-links-container {
+                gap: 0.5rem !important;
             }
 
             .dropdown {
@@ -472,7 +495,7 @@
             A Matrix client combining a Proof-of-Contribution token system for shared goals with contribution-weighted governance.
         </p>
         
-        <div style="margin: 2rem 0; display: flex; gap: 1.5rem; justify-content: center; flex-wrap: nowrap;">
+        <div class="guide-links-container" style="margin: 2rem 0; display: flex; gap: 1rem; justify-content: center; flex-wrap: nowrap;">
             <button class="btn btn-guide" id="guideBtn">
                 Overview & Guide
             </button>
@@ -536,6 +559,14 @@
         <div class="organization">
             <p>All for one, One for all.</p>
             <p>Developed by <a href="https://github.com/BROTHERHOOD42" target="_blank">BROTHERHOOD</a></p>
+            <div class="social-icons">
+                <a href="https://github.com/BROTHERHOOD42" target="_blank">
+                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" class="social-icon">
+                </a>
+                <a href="https://giveth.io" target="_blank">
+                    <img src="https://giveth.io/favicon.ico" alt="Giveth" class="social-icon">
+                </a>
+            </div>
         </div>
     </div>
 
