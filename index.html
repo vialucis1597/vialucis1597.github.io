@@ -147,14 +147,19 @@
         }
 
         .btn-guide {
-            background: #FF5722;
-            color: white;
+            background: white;
+            color: #333;
+            border: 2px solid #FF5722;
+            font-size: 0.9rem;
+            padding: 0.7rem 1.5rem;
+            min-width: auto;
         }
 
         .btn-guide:hover {
-            background: #E64A19;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 87, 34, 0.3);
+            background: #FF5722;
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(255, 87, 34, 0.2);
         }
 
         .dropdown {
@@ -428,6 +433,12 @@
             A Matrix client combining a Proof-of-Contribution token system for shared goals with contribution-weighted governance.
         </p>
         
+        <div style="margin: 2rem 0;">
+            <button class="btn btn-guide" id="guideBtn">
+                📖 Overview & User Guide (English)
+            </button>
+        </div>
+        
         <div class="buttons">
             <a href="https://BROTHERHOOD42.github.io/Polarius-web/webapp" class="btn btn-primary" target="_blank">
                 🌐 Launch Web App
@@ -478,10 +489,6 @@
                     </a>
                 </div>
             </div>
-            
-            <button class="btn btn-guide" id="guideBtn">
-                📖 Overview & User Guide (English)
-            </button>
         </div>
         
         <div class="organization">
