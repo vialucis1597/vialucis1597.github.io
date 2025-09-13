@@ -146,6 +146,17 @@
             box-shadow: 0 4px 12px rgba(233, 30, 99, 0.3);
         }
 
+        .btn-guide {
+            background: #FF5722;
+            color: white;
+        }
+
+        .btn-guide:hover {
+            background: #E64A19;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 87, 34, 0.3);
+        }
+
         .dropdown {
             position: relative;
             display: inline-block;
@@ -211,6 +222,144 @@
             color: #FFA500;
             text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
             transform: scale(1.05);
+        }
+
+        .guide-section {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .guide-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            color: #333;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .guide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .guide-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .guide-close {
+            background: #f44336;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .guide-close:hover {
+            background: #d32f2f;
+            transform: scale(1.1);
+        }
+
+        .guide-body {
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .guide-body h1, .guide-body h2, .guide-body h3 {
+            color: #333;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .guide-body h1 {
+            font-size: 1.8rem;
+            border-bottom: 2px solid #FF5722;
+            padding-bottom: 0.5rem;
+        }
+
+        .guide-body h2 {
+            font-size: 1.5rem;
+            color: #FF5722;
+        }
+
+        .guide-body h3 {
+            font-size: 1.3rem;
+            color: #666;
+        }
+
+        .guide-body p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .guide-body img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 1rem 0;
+        }
+
+        .guide-body strong {
+            color: #FF5722;
+            font-weight: 600;
+        }
+
+        .guide-body ul, .guide-body ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .guide-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .guide-body blockquote {
+            border-left: 4px solid #FF5722;
+            padding-left: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .guide-section {
+                padding: 1rem;
+            }
+            
+            .guide-content {
+                padding: 1.5rem;
+            }
+            
+            .guide-title {
+                font-size: 1.5rem;
+            }
+            
+            .guide-body {
+                font-size: 0.9rem;
+            }
         }
 
 
@@ -329,11 +478,28 @@
                     </a>
                 </div>
             </div>
+            
+            <button class="btn btn-guide" id="guideBtn">
+                📖 Overview & User Guide (English)
+            </button>
         </div>
         
         <div class="organization">
             <p>All for one, One for all.</p>
             <p>Developed by <a href="https://github.com/BROTHERHOOD42" target="_blank">BROTHERHOOD</a></p>
+        </div>
+    </div>
+
+    <!-- Guide Section -->
+    <div class="guide-section" id="guideSection">
+        <div class="guide-content">
+            <div class="guide-header">
+                <h1 class="guide-title">Polarius Overview & User Guide</h1>
+                <button class="guide-close" id="guideClose">&times;</button>
+            </div>
+            <div class="guide-body" id="guideBody">
+                <!-- Content will be loaded here -->
+            </div>
         </div>
     </div>
 
@@ -434,6 +600,148 @@
                         this.style.backgroundColor = '';
                     }, 3000);
                 });
+            });
+
+            // Guide functionality
+            const guideBtn = document.getElementById('guideBtn');
+            const guideSection = document.getElementById('guideSection');
+            const guideClose = document.getElementById('guideClose');
+            const guideBody = document.getElementById('guideBody');
+
+            // Polarius.md content (converted to HTML)
+            const guideContent = `
+                <div align="center"><br><img width="128" height="128" alt="Polarius_overview" src="https://github.com/user-attachments/assets/59300c0b-6a79-4deb-a0c5-fa079b1552b6" /></div><br>
+                
+                <p><strong>Polarius</strong> is a Matrix communication client that combines a proof-of-contribution token system for shared goals with contribution-weighted governance. Through this, we can regenerate the driving force of communities to promote a borderless mutual aid society while overcoming the limitations of existing national systems.</p>
+                
+                <h2>Existing National Systems</h2>
+                
+                <p>The equivalent exchange of 'contribution-guarantee' between members and communities is a core principle of community maintenance and operation. However, due to structural flaws in modern society, the guarantee of members' contributions is not practically realized.</p>
+                
+                <h3>Credit-based Issuance Structure: Loss of Distribution Rights for Contributions</h3>
+                
+                <p>In today's financial system, currency is issued through a credit creation process based on central banks' reserve ratios, mostly through real estate loans. The main path for new currency circulation is not 'substantial contribution' to the community like production activities, but a 'credit loan structure' secured by real estate, which is a necessity for life. The increase in currency volume in this issuance structure leads to price increases accompanied by necessities, ultimately burdening citizens with 'rising survival costs'. This creates a gap between gradual wage increases and prices, and members gradually lose their distribution rights for contributions, eventually facing economic recession and asset market collapse. In this economic structure, the driving force base of actual contributors cannot be maintained, so the community's positive feedback structure cannot be secured.</p>
+                
+                <h3>Authority-centered Governance Structure: Absence of Governance Rights for Contributions</h3>
+                
+                <p>For the efficiency of decision-making, members elect representatives for governance and delegate governance rights to representatives. However, political representatives have inefficiencies in that they have slow and insufficient information about all members, making it impossible to provide accurate and timely feedback on problems. The delegated feedback is distorted by party politics, causing greater market problems. The essence of system paralysis is not the majority of citizens who form the system and need it, but a minority governance structure separated from them. Human communities with paralyzed political negative feedback structures face repeated social collapse.</p>
+                
+                <h2>Polarius, New System</h2>
+                
+                <p>Polarius issues currency based on proof of contribution to the community, ensuring members' contribution distribution rights. In this issuance structure, currency holdings are quantified contribution amounts, and point-fixed governance is implemented for holdings to ensure contribution governance rights. All of this operates on a decentralized server structure on the Matrix communication protocol.</p>
+                
+                <div align="center"><br><img width="1157" height="654" alt="Polarius drawio" src="https://github.com/user-attachments/assets/9ce7aec3-b29f-4820-b304-1e3a7c1eeb1c" /></div><br>
+                
+                <h3>User Guide: Proof-of-Contribution Issuance Structure</h3>
+                
+                <p>Anyone can form autonomous organizations with common goals on the Polarius client, and anyone can receive currency issuance through the proof-of-contribution function for common goals in communication rooms within the formed organization. This way, currency is issued directly to contribution subjects, preserving members' contribution driving force, and communities secure sustainability along with positive feedback structures.</p>
+                
+                <h4>Login</h4>
+                <p><em>The client is provided at https://brotherhood42.github.io</em></p>
+                <img width="1264" height="603" alt="1" src="https://github.com/user-attachments/assets/f92f475f-1784-4bb5-a236-d4c2fc4250d5" />
+                <img width="1262" height="605" alt="2" src="https://github.com/user-attachments/assets/8bb2332f-744e-4b36-a43c-20d701ad34da" />
+                <img width="1267" height="617" alt="3" src="https://github.com/user-attachments/assets/40f27a74-7f9b-4521-9a45-3935030cac23" />
+                
+                <h4>DAO Creation</h4>
+                <p><em>When creating a DAO, ledger room, GOV space, and DCA space are automatically created under the DAO space. These three elements perform essential functions of the DAO.</em></p>
+                <img width="1263" height="625" alt="4" src="https://github.com/user-attachments/assets/99326ef6-9fde-4aee-b949-d0ac0a2df128" />
+                <img width="1265" height="621" alt="5" src="https://github.com/user-attachments/assets/6abedb3b-276b-4999-832f-e1d268007247" />
+                <img width="1269" height="626" alt="6" src="https://github.com/user-attachments/assets/18467051-51ee-4c31-927d-ebac9735295d" />
+                
+                <h4>DAO Wallet Creation</h4>
+                <p><em>When creating a wallet, save the displayed mnemonic phrase. Without the mnemonic phrase, the wallet cannot be recovered.</em></p>
+                <img width="1258" height="621" alt="7" src="https://github.com/user-attachments/assets/67b56dca-f619-4468-8ed2-0addad9c9eb7" />
+                <img width="1252" height="628" alt="8" src="https://github.com/user-attachments/assets/69429845-a819-49dd-8085-1180e6dddd32" />
+                <img width="1254" height="622" alt="9" src="https://github.com/user-attachments/assets/31c5505b-c23a-4efa-9c1e-3a87ca66063a" />
+                
+                <h4>DCA Room Creation</h4>
+                <img width="1256" height="617" alt="10" src="https://github.com/user-attachments/assets/68f47c7e-6c3b-48e3-b3cd-9d04c6b6fe2b" />
+                <img width="1262" height="627" alt="11" src="https://github.com/user-attachments/assets/7cc15d37-a5f8-438f-9437-5e1eb4629e61" />
+                <img width="1261" height="616" alt="12" src="https://github.com/user-attachments/assets/6d83ea3c-b897-4960-9ca7-d7d80c8a7736" />
+                <img width="1246" height="609" alt="13" src="https://github.com/user-attachments/assets/0b7abd93-3e78-47f4-90e4-a273903bfdbf" />
+                
+                <h4>Proof of Contribution (Verifier's Perspective)</h4>
+                <p><em>To smoothly use the DAO system including proof of contribution and wallet recovery, contributors must join the ledger room, GOV space, and DCA space.</em></p>
+                <p><em>Proof of contribution is achieved through verification by Kudos permission holders through public keys. When verified, currency equivalent to the Kudos Value is paid to the contributor, and transactions are automatically created and recorded in the ledger room (ledger).</em></p>
+                <img width="1248" height="602" alt="14" src="https://github.com/user-attachments/assets/9eb75c0a-3714-4d01-a104-eb31b2bbecdf" />
+                <img width="1248" height="604" alt="15" src="https://github.com/user-attachments/assets/1005af08-35a7-4c77-88f5-cb8acf1a780a" />
+                <img width="1248" height="606" alt="16" src="https://github.com/user-attachments/assets/414cbc05-3e0b-49c8-819f-d96ccd63f654" />
+                <img width="1250" height="599" alt="17" src="https://github.com/user-attachments/assets/334b84c9-b038-481b-8b6c-88b721553561" />
+                
+                <h4>Granting Verification Authority (Optional)</h4>
+                <p><em>Verification authority level settings are available in the 'Kudos' section under the Roles & Permissions menu in DAO space and DCA room 'Settings'. (Default: 25)</em></p>
+                <img width="1256" height="611" alt="18" src="https://github.com/user-attachments/assets/aaf2a95e-ed5a-47d0-a29c-2f34b8f3d675" />
+                <img width="1256" height="604" alt="19" src="https://github.com/user-attachments/assets/4062c89f-295e-478d-92d1-606bc463cdab" />
+                
+                <h3>User Guide: Contribution-based Governance Structure</h3>
+                
+                <p>Currency holdings in the proof-of-contribution issuance structure are contribution amounts. The Polarius client supports Snapshot governance, a point-fixed governance function for currency holdings, ensuring members' contribution governance rights. This way, all participants are guaranteed equality of rights, implementing a reasonable social contract where "community contributors are community decision-making participants."</p>
+                
+                <h4>Proposal Creation Condition Settings</h4>
+                <p><em>Administrators can set the 'Required B Token Amount' in the GOV Settings menu of GOV space settings to set holding amount conditions for proposal creation.</em></p>
+                <img width="1257" height="619" alt="20" src="https://github.com/user-attachments/assets/dd2f6167-ff69-4e84-b20c-0454be5d38ca" />
+                
+                <p><em>The default value for room creation authority (Manage rooms in this space) in GOV space is 25. If not changed to 0 (Default), general contributors with Default authority cannot create proposals even if they meet the 'Required B Token Amount'. This can be maintained to allow only authorities to access proposal creation, or changed to 0 (Default) to enable pure contribution-based proposal creation.</em></p>
+                <img width="1237" height="612" alt="image" src="https://github.com/user-attachments/assets/cfe481f7-ba1b-4ccf-ba6c-ec197d641b14" />
+                <img width="1246" height="615" alt="22" src="https://github.com/user-attachments/assets/0056db23-d9e3-430d-87b1-6b4b51c6bf97" />
+                
+                <h4>Proposal Creation</h4>
+                <p><em>Contributors can create proposals if they meet the holding amount conditions of the corresponding DAO.</em></p>
+                <img width="1256" height="663" alt="23" src="https://github.com/user-attachments/assets/539f9d20-c1a0-41c1-bf48-d716f1900fd9" />
+                <img width="1260" height="663" alt="24" src="https://github.com/user-attachments/assets/be4aa4bb-4b92-4283-940a-ae0d069b77ac" />
+                <img width="1232" height="648" alt="25" src="https://github.com/user-attachments/assets/4eae6242-aa3f-4cd3-b10a-1d0204cf4edd" />
+                <img width="1265" height="671" alt="26" src="https://github.com/user-attachments/assets/5248ecd3-0a23-420c-ab6b-2e5785fda1a0" />
+                <img width="1268" height="670" alt="27" src="https://github.com/user-attachments/assets/b803e645-422e-4851-b27f-5d5b65db7da1" />
+                <img width="1267" height="666" alt="28" src="https://github.com/user-attachments/assets/acb4f2a1-1a37-4652-b392-a35a63590275" />
+                <img width="1267" height="671" alt="29" src="https://github.com/user-attachments/assets/12a4f748-e021-487f-8ced-afd63fdabc18" />
+                
+                <h4>Created Proposal Confirmation</h4>
+                <p><em>The title, description, and voting entered in the proposal creation form are automatically created as one proposal bundle simultaneously with proposal creation. Fix this.</em></p>
+                <p><em>The creator can also vote with Voting Power according to their holdings at the time of creation.</em></p>
+                <img width="1255" height="668" alt="30" src="https://github.com/user-attachments/assets/756a0760-0cf9-4504-97cd-3fba1160c191" />
+                <img width="1256" height="660" alt="31" src="https://github.com/user-attachments/assets/697d7b6c-ca24-4e07-82e7-4b7d5abee384" />
+                
+                <h4>Vote End Confirmation</h4>
+                <p><em>When voting ends, the end result is transmitted, and the in-progress display of the Proposal list room card changes to a check mark.</em></p>
+                <img width="1256" height="660" alt="32" src="https://github.com/user-attachments/assets/a7251bd6-16d6-47c1-844f-6c5a7131af94" />
+                
+                <p><em>Voting according to Voting Power is a concept of influence exercise, not a concept of holding amount deduction.</em></p>
+                <img width="1265" height="667" alt="33" src="https://github.com/user-attachments/assets/aba60cac-1387-4eaa-b2e7-f406d6d1c3f3" />
+                <img width="1268" height="667" alt="34" src="https://github.com/user-attachments/assets/40074b1a-c196-41db-a2d4-0d07d977a1f0" />
+                
+                <h4>Wallet Functions</h4>
+                <img width="1258" height="667" alt="35" src="https://github.com/user-attachments/assets/51dcec28-e015-4563-ba19-acf65a0c6e8e" />
+                <img width="1258" height="665" alt="36" src="https://github.com/user-attachments/assets/181209f2-ec45-4d2a-a26a-5969e56b8247" />
+                <img width="1263" height="660" alt="37" src="https://github.com/user-attachments/assets/864de567-c9a2-4775-bdf3-32ad25fdbcf4" />
+            `;
+
+            // Show guide
+            guideBtn.addEventListener('click', function() {
+                guideBody.innerHTML = guideContent;
+                guideSection.style.display = 'block';
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            });
+
+            // Hide guide
+            guideClose.addEventListener('click', function() {
+                guideSection.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Restore scrolling
+            });
+
+            // Hide guide when clicking outside
+            guideSection.addEventListener('click', function(e) {
+                if (e.target === guideSection) {
+                    guideSection.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Hide guide with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && guideSection.style.display === 'block') {
+                    guideSection.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
             });
         });
     </script>
